@@ -121,18 +121,14 @@ void loop()
         val = Blue.read();
         if (val == 't')
           {
-            Blue.print('t');
             float h,t;
             t = dht.readTemperature();
-            //h = dht.readHumidity();
-            
             Blue.print(t);
-            Serial.print(t);
           }
           if (val == 'h')
           {
+            h = dht.readHumidity();
             Blue.print(h);
-            Serial.print(h); 
           }
                 
       }
