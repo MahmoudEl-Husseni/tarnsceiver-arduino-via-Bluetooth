@@ -138,6 +138,7 @@ void loop()
           }
           if (val == 'h')
           {
+            h = dht.readHumidity();
             Blue.print(h);
             Serial.print(h); 
           }
