@@ -28,47 +28,49 @@ void loop()
   if (Blue.available())
     {
       val = Blue.read();
-      if (val=='r') 
+      Serial.print(val);
+      if (val=='f')
         {
         digitalWrite(9,0);
-        digitalWrite(10,255);
-        digitalWrite(11,255);
+        digitalWrite(10,0);
+        digitalWrite(11,0);
         }
-      else if (val=='g')
+      
+      if (val=='r') 
         {
         digitalWrite(9,255);
         digitalWrite(10,0);
-        digitalWrite(11,255);
+        digitalWrite(11,0);
+        }
+      else if (val=='g')
+        {
+        digitalWrite(9,0);
+        digitalWrite(10,255);
+        digitalWrite(11,0);
         }
       else if (val=='b')
-        {
-          digitalWrite(9,255);
-          digitalWrite(10,255);
-          digitalWrite(11,0);
-        }
-      else if (val=='o')
-        {
-          digitalWrite(9,0);
-          digitalWrite(10,0);
-          digitalWrite(11,0);
-        }   
-      else if (val=='y')
         {
           digitalWrite(9,0);
           digitalWrite(10,0);
           digitalWrite(11,255);
         }
-      else if (val=='f')
+      else if (val=='o')
         {
-        digitalWrite(9,255);
-        digitalWrite(10,255);
-        digitalWrite(11,255);
+          digitalWrite(9,255);
+          digitalWrite(10,255);
+          digitalWrite(11,255);
+        }   
+      else if (val=='y')
+        {
+          digitalWrite(9,255);
+          digitalWrite(10,255);
+          digitalWrite(11,0);
         }
       else if (val=='e')
         {
-        digitalWrite(9,0);
-        digitalWrite(9,105);
         digitalWrite(9,255);
+        digitalWrite(10,150);
+        digitalWrite(11,0);
         }
       else if (val == 's')
         {
@@ -78,6 +80,7 @@ void loop()
           {
             analogWrite(red,i);
             analogWrite(green,255-i);
+            delay(5);
           }
           
           //=========b==========
@@ -85,6 +88,7 @@ void loop()
           analogWrite(red , 255);
           for (int i =255;i>=0;i--)
           {
+            delay(5);
             analogWrite(blue , i);
           }
                   
@@ -93,6 +97,7 @@ void loop()
           analogWrite(red , 255);
           for (int i =0;i<=255;i++)
           {
+            delay(5);
             analogWrite(green , i);
           }
                   
@@ -101,6 +106,7 @@ void loop()
           analogWrite(blue , 0);
           for (int i =255;i>=0;i--)
           {
+            delay(5);
             analogWrite(red , i);
           }
                   
@@ -109,6 +115,7 @@ void loop()
           analogWrite(red , 0);
           for (int i =0;i<=255;i++)
           {
+            delay(5);
             analogWrite(blue , i);
           }
         }
@@ -121,14 +128,18 @@ void loop()
         val = Blue.read();
         if (val == 't')
           {
+            Blue.print('t');
             float h,t;
             t = dht.readTemperature();
+            //h = dht.readHumidity();
+            
             Blue.print(t);
+            Serial.print(t);
           }
           if (val == 'h')
           {
-            h = dht.readHumidity();
             Blue.print(h);
+            Serial.print(h); 
           }
                 
       }
